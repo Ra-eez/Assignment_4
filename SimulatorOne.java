@@ -10,6 +10,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -36,11 +38,11 @@ public class SimulatorOne {
             
             System.out.println("Enter the details of edges from node"+(i+1));
             String nodeDetails = in.nextLine();
-            String[] info = nodeDetails.split("\\ ");
+            String[] info = nodeDetails.split("\\s+");
             
             int counter = 1;
             
-            for (int j = 0; j < (info.length-1)/2; i++){
+           for (int j = 0; j < (info.length-1)/2; j++){
                 
                 g.addEdge(info[0], info[counter],Double.parseDouble(info[counter+1]));
                 
@@ -64,16 +66,45 @@ public class SimulatorOne {
         
         double[] totalCosts = new double[hospitals];
         
+        
         for (int k = 0; k < victims; k++){
             
+            // get all the shortest paths from each hospital
             for (int l = 0; l < hospitals; l++){
                
                 g.dijkstra( hosInfo[l] );
                 totalCosts[l] = g.getPathWeight(vicInfo[k]);
-                g.printPath(vicInfo[k]);
+                //g.printPath(vicInfo[k]);
+                
+                //g.dijkstra( vicInfo[k]);
+              //  g.printPath(hospitalInfo[])
             }
+           /* for (int i = 0; i < totalCosts.length; i++){
+                
+                for (int j = 0; j < totalCosts.length; j++){
+                    {
+                    if totalCosts[]
+                }
+            }*/
             
         }
+        //find out which hospital(s) were the cheapest
+        int min = 0;
+        ArrayList equals = new ArrayList();
+        for (int i = 0; i<totalCosts.length; i++){
+            if (i!=0){
+                if (totalCosts[i]<totalCosts[min]){
+                    min = i;
+                    equals.clear();
+                }
+                else if (totalCosts[i]==totalCosts[min]){
+                    equals.add(i);
+                }
+        }
+        //print the path/ store the path
+        //repeat the process from patients to hospital this time
+        //print all
+        
         /*Graph g = new Graph( ); 	
             // read files
         	FileReader fin = new FileReader("/home/moegamat/Documents/Assignment4_assisting/Graph1.txt");
@@ -107,5 +138,5 @@ public class SimulatorOne {
                     }
                 }*/
     }
-        }
+        }}
 
